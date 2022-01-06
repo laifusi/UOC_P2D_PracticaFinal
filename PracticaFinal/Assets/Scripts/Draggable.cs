@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class Draggable : MonoBehaviour
 {
-    private Vector3 offset;
+    private bool droppable;
 
-    private void OnMouseDown()
+    public void SetDroppable(bool canBeDropped)
     {
-        offset = transform.position - MouseControl.Instance.GetMousePosition();
+        droppable = canBeDropped;
     }
 
-    private void OnMouseDrag()
+    public void Drop()
     {
-        transform.position = MouseControl.Instance.GetMousePosition() + offset;
-    }
-
-    private void OnMouseUp()
-    {
+        if(!droppable)
+        {
+            Destroy(gameObject);
+        }
     }
 }
