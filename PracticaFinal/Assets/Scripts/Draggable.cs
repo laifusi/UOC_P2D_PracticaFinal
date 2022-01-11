@@ -18,4 +18,9 @@ public class Draggable : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void SetSprite(Sprite sprite)
+    {
+        GetComponent<SpriteRenderer>().sprite = sprite;
+    }
 }
