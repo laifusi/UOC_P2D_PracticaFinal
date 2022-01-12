@@ -1,7 +1,22 @@
 fileFormatVersion: 2
-guid: 82be52d0ae7913840a235bf223ae8d9e
+guid: 4e5a087b2883cae4ea0dc650b642ed44
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -8133325854658379962
+    second: ToyMachines_0
+  - first:
+      213: -1227751826160794587
+    second: ToyMachines_1
+  - first:
+      213: 5165735916058747462
+    second: ToyMachines_2
+  - first:
+      213: -1881441437326556159
+    second: ToyMachines_3
+  - first:
+      213: -3067602543926946215
+    second: ToyMachines_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,11 +56,11 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
-  spritePivot: {x: 0.5, y: 1.5}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -113,7 +128,112 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: ToyMachines_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1612
+        width: 1164
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64f36963a3f902f80800000000000000
+      internalID: -8133325854658379962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToyMachines_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1195
+        width: 1164
+        height: 352
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5244951183626fee0800000000000000
+      internalID: -1227751826160794587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToyMachines_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 811
+        width: 1164
+        height: 352
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 642a828427160b740800000000000000
+      internalID: 5165735916058747462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToyMachines_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 404
+        width: 1164
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10443762bf6c3e5e0800000000000000
+      internalID: -1881441437326556159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToyMachines_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1164
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95656293dbfad65d0800000000000000
+      internalID: -3067602543926946215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
