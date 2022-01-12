@@ -5,6 +5,7 @@ using UnityEngine;
 public class Draggable : MonoBehaviour
 {
     private bool droppable;
+    private DropPoint dropPoint;
 
     public void SetDroppable(bool canBeDropped)
     {
@@ -13,14 +14,21 @@ public class Draggable : MonoBehaviour
 
     public void Drop()
     {
-        if(!droppable)
+        if (droppable)
         {
-            Destroy(gameObject);
+            dropPoint.ObjectDropped();
         }
+
+        Destroy(gameObject);
     }
 
     public void SetSprite(Sprite sprite)
     {
         GetComponent<SpriteRenderer>().sprite = sprite;
+    }
+
+    public void SetDropPoint(DropPoint point)
+    {
+        dropPoint = point;
     }
 }

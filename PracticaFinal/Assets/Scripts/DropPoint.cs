@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DropPoint : MonoBehaviour
+public abstract class DropPoint : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected void OnTriggerEnter2D(Collider2D collision)
     {
         Draggable item = collision.GetComponent<Draggable>();
         if (item != null)
         {
             item.SetDroppable(true);
+            item.SetDropPoint(this);
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    protected void OnTriggerExit2D(Collider2D collision)
     {
         Draggable item = collision.GetComponent<Draggable>();
         if(item != null)
@@ -21,4 +22,6 @@ public class DropPoint : MonoBehaviour
             item.SetDroppable(false);
         }
     }
+
+    public abstract void ObjectDropped();
 }

@@ -22,6 +22,7 @@ public class Box : MonoBehaviour
     {
         item = Instantiate(prefab, MouseControl.Instance.GetMousePosition(), Quaternion.identity).transform;
         item.GetComponent<Draggable>().SetSprite(itemSO.sprite);
+        item.gameObject.AddComponent<PolygonCollider2D>();
     }
 
     private void OnMouseDrag()
