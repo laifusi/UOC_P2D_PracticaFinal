@@ -44,3 +44,12 @@ TagManager:
   - name: DraggableObject
     uniqueID: 939797219
     locked: 0
+  - name: MadeToy
+    uniqueID: 531351937
+    locked: 0
+  - name: Letter
+    uniqueID: 2549710213
+    locked: 0
+  - name: LetterToy
+    uniqueID: 2913088121
+    locked: 0
