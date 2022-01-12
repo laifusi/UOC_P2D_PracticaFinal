@@ -190,8 +190,9 @@ GameObject:
   m_Component:
   - component: {fileID: 216723388}
   - component: {fileID: 216723389}
+  - component: {fileID: 216723390}
   m_Layer: 0
-  m_Name: FullCardBox
+  m_Name: CardBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,7 +206,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 216723387}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.21, y: 0.74, z: 0}
+  m_LocalPosition: {x: -6.21, y: -0.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 854259588}
@@ -251,7 +252,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 12740d67d53e9f543b22553dc0d602e9, type: 3}
+  m_Sprite: {fileID: 18330866201870305, guid: 1e69669e38a62d649baaa6a132cbc618, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -262,6 +263,35 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &216723390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216723387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74946864b414f6d47b3d7f3ae0f45aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  letterBoxSprites:
+  - {fileID: 18330866201870305, guid: 1e69669e38a62d649baaa6a132cbc618, type: 3}
+  - {fileID: 7435849431509577879, guid: 1e69669e38a62d649baaa6a132cbc618, type: 3}
+  - {fileID: 1250253058943800828, guid: 1e69669e38a62d649baaa6a132cbc618, type: 3}
+  - {fileID: 1395055196606536110, guid: 1e69669e38a62d649baaa6a132cbc618, type: 3}
+  - {fileID: 5475054394572323801, guid: 1e69669e38a62d649baaa6a132cbc618, type: 3}
+  - {fileID: 372056812981918361, guid: 1e69669e38a62d649baaa6a132cbc618, type: 3}
+  - {fileID: 5260465391000736452, guid: 1e69669e38a62d649baaa6a132cbc618, type: 3}
+  - {fileID: 4975013212109259272, guid: 1e69669e38a62d649baaa6a132cbc618, type: 3}
+  - {fileID: 112616559210783931, guid: 1e69669e38a62d649baaa6a132cbc618, type: 3}
+  - {fileID: -5020631507410383041, guid: 1e69669e38a62d649baaa6a132cbc618, type: 3}
+  - {fileID: 4422582603098157684, guid: 1e69669e38a62d649baaa6a132cbc618, type: 3}
+  - {fileID: 2867592516443776655, guid: 1e69669e38a62d649baaa6a132cbc618, type: 3}
+  - {fileID: -1245219745997156514, guid: 1e69669e38a62d649baaa6a132cbc618, type: 3}
+  - {fileID: -8075626180154112054, guid: 1e69669e38a62d649baaa6a132cbc618, type: 3}
+  - {fileID: 5302019589591432228, guid: 1e69669e38a62d649baaa6a132cbc618, type: 3}
+  letter: {fileID: 1623788970}
 --- !u!1 &351554777
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,6 +374,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &370009586 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7815704801122313381, guid: 72b6eefaf99c3d84a98687b726f1590b, type: 3}
+  m_PrefabInstance: {fileID: 1260143197}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -662,6 +697,11 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!212 &744638456 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7815704799286172030, guid: 72b6eefaf99c3d84a98687b726f1590b, type: 3}
+  m_PrefabInstance: {fileID: 1260143197}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &768839357
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,6 +795,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: WrapGift
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 216723390}
+        m_TargetAssemblyTypeName: LettersBox, Assembly-CSharp
+        m_MethodName: TakeLetter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &768839360
@@ -1559,15 +1611,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7815704801232172321, guid: 72b6eefaf99c3d84a98687b726f1590b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7815704801232172321, guid: 72b6eefaf99c3d84a98687b726f1590b, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7815704801232172321, guid: 72b6eefaf99c3d84a98687b726f1590b, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7815704801232172321, guid: 72b6eefaf99c3d84a98687b726f1590b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1772,6 +1824,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3653f6508b57e7d468cf329ab198b774, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!212 &1543046079 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7815704799294879748, guid: 72b6eefaf99c3d84a98687b726f1590b, type: 3}
+  m_PrefabInstance: {fileID: 1260143197}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1547932831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1826,6 +1883,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1623788969}
   - component: {fileID: 1623788968}
+  - component: {fileID: 1623788970}
   m_Layer: 0
   m_Name: Letter
   m_TagString: Untagged
@@ -1899,6 +1957,44 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1623788970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623788967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 763699f855670a14d9d8b52baa5eb767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleHeads:
+  - {fileID: 11400000, guid: 3c29262189a93c84aaf22053ea35ca16, type: 2}
+  - {fileID: 11400000, guid: e77e4a9d79ce80f4aaff1b3848d0dcdd, type: 2}
+  - {fileID: 11400000, guid: ea470819437baf64c86999d71771a056, type: 2}
+  - {fileID: 11400000, guid: d5226868585408a45a9d4690acc7d055, type: 2}
+  possibleBodies:
+  - {fileID: 11400000, guid: d7d4b7e37066bfa43b07106faba8d723, type: 2}
+  - {fileID: 11400000, guid: 2e21766c8a8b9a74f8c167897412fb2b, type: 2}
+  - {fileID: 11400000, guid: 7194ee72ea9935d47824ed60831d80ae, type: 2}
+  - {fileID: 11400000, guid: 9b7bdf7f84b74fa4d97ae57348831405, type: 2}
+  possibleArms:
+  - {fileID: 11400000, guid: cb33ed6583ba1ce468996f0c416a9d66, type: 2}
+  - {fileID: 11400000, guid: a97c51dafc2de3b47984a0922c37f0d2, type: 2}
+  - {fileID: 11400000, guid: 7b4472f68e90e644999efd01df99fabb, type: 2}
+  - {fileID: 11400000, guid: ac49f19301f164045ac0c5c4df6ccb8f, type: 2}
+  possibleLegs:
+  - {fileID: 11400000, guid: c9a39cc55edb1ff4dae41c70dfaf013a, type: 2}
+  - {fileID: 11400000, guid: 18a30ec4d3d9e48428067824d7a881e1, type: 2}
+  - {fileID: 11400000, guid: 725c8bacd7a84214a8cc6cb0543df85d, type: 2}
+  - {fileID: 11400000, guid: c41aadb72f613434bb5fdc64f1f94d89, type: 2}
+  head: {fileID: 2024773351}
+  body: {fileID: 1543046079}
+  leftArm: {fileID: 2015992626}
+  rightArm: {fileID: 1834956363}
+  leftLeg: {fileID: 744638456}
+  rightLeg: {fileID: 370009586}
 --- !u!1 &1625008472
 GameObject:
   m_ObjectHideFlags: 0
@@ -2070,6 +2166,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1834956363 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7815704800969930901, guid: 72b6eefaf99c3d84a98687b726f1590b, type: 3}
+  m_PrefabInstance: {fileID: 1260143197}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1863319029
 GameObject:
   m_ObjectHideFlags: 0
@@ -2261,6 +2362,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.97, y: 1.18}
   m_EdgeRadius: 0
+--- !u!212 &2015992626 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7815704800686499822, guid: 72b6eefaf99c3d84a98687b726f1590b, type: 3}
+  m_PrefabInstance: {fileID: 1260143197}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &2024773351 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7815704799567557719, guid: 72b6eefaf99c3d84a98687b726f1590b, type: 3}
+  m_PrefabInstance: {fileID: 1260143197}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7815704800459346963
 PrefabInstance:
   m_ObjectHideFlags: 0
