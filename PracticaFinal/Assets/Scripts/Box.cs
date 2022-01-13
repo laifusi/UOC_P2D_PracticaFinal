@@ -38,6 +38,6 @@ public class Box : MonoBehaviour
     private void OnMouseUp()
     {
         if(MouseControl.Instance.DetectClicks && item != null)
-            item.GetComponent<Draggable>().Drop(itemSO);
+            item.GetComponent<Draggable>().DropItem(itemSO);
     }
 }

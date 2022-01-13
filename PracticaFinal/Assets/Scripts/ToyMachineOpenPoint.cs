@@ -11,8 +11,13 @@ public class ToyMachineOpenPoint : DropPoint
         toyMachine = GetComponentInParent<ToyMachine>();
     }
 
-    public override void ObjectDropped(ItemSO item)
+    public override void ItemDropped(ItemSO item)
     {
         toyMachine.AddToyPart(item);
+    }
+
+    public override void ToyDropped(ToyObject toy)
+    {
+        toy.ReturnToLastPoint();
     }
 }

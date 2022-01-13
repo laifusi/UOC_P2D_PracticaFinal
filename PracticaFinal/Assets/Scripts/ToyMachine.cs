@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ToyMachine : MonoBehaviour
 {
-    private Toy createdToy;
+    [HideInInspector] public Toy createdToy;
     private ToyPart[] toyParts;
     private List<ItemSO> items = new List<ItemSO>();
 
@@ -30,6 +29,9 @@ public class ToyMachine : MonoBehaviour
 
     public void MakeToy()
     {
+        if (toy != null)
+            DestroyToyGameObject();
+
         toy = Instantiate(toyPrefab, exitPoint.position, Quaternion.identity);
         toySpriteRenderers = toy.GetComponentsInChildren<SpriteRenderer>();
         head = toySpriteRenderers[0];
@@ -192,5 +194,13 @@ public class ToyMachine : MonoBehaviour
                     break;
             }
         }
+
+        createdToy = new Toy(toyParts);
+        items.Clear();
+    }
+
+    public void DestroyToyGameObject()
+    {
+        Destroy(toy);
     }
 }

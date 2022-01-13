@@ -34,5 +34,7 @@ public class LettersBox : MonoBehaviour
         if (lettersLeft >= 0)
             spriteRenderer.sprite = letterBoxSprites[letterBoxSprites.Length - 1 - lettersLeft];
         letter.OpenNewLetter();
+        letter.gameObject.SetActive(true);
+        MouseControl.Instance.DetectClicks = false;
     }
 }

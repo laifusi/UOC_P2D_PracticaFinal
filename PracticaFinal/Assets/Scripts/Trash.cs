@@ -14,26 +14,37 @@ public class Trash : DropPoint
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public override void ObjectDropped(ItemSO item)
+    public override void ItemDropped(ItemSO item)
+    {
+        UpdateThrownParts();
+    }
+
+    public override void ToyDropped(ToyObject toy)
+    {
+        UpdateThrownParts();
+        Destroy(toy.gameObject);
+    }
+
+    private void UpdateThrownParts()
     {
         partsThrown++;
-        if(partsThrown >= 25)
+        if (partsThrown >= 25)
         {
             spriteRenderer.sprite = trashSprites[5];
         }
-        else if(partsThrown >= 20)
+        else if (partsThrown >= 20)
         {
             spriteRenderer.sprite = trashSprites[4];
         }
-        else if(partsThrown >= 15)
+        else if (partsThrown >= 15)
         {
             spriteRenderer.sprite = trashSprites[3];
         }
-        else if(partsThrown >= 10)
+        else if (partsThrown >= 10)
         {
             spriteRenderer.sprite = trashSprites[2];
         }
-        else if(partsThrown >= 5)
+        else if (partsThrown >= 5)
         {
             spriteRenderer.sprite = trashSprites[1];
         }

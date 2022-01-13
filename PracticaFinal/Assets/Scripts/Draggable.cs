@@ -12,14 +12,26 @@ public class Draggable : MonoBehaviour
         droppable = canBeDropped;
     }
 
-    public void Drop(ItemSO item)
+    public void DropItem(ItemSO item)
     {
         if (droppable)
         {
-            dropPoint.ObjectDropped(item);
+            dropPoint.ItemDropped(item);
         }
 
         Destroy(gameObject);
+    }
+
+    public void DropToy(ToyObject toy)
+    {
+        if(droppable)
+        {
+            dropPoint.ToyDropped(toy);
+        }
+        else
+        {
+            toy.ReturnToLastPoint();
+        }
     }
 
     public void SetSprite(Sprite sprite)
