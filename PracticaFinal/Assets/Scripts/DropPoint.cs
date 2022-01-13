@@ -23,5 +23,5 @@ public abstract class DropPoint : MonoBehaviour
         }
     }
 
-    public abstract void ObjectDropped();
+    public abstract void ObjectDropped(ItemSO item);
 }

@@ -20,19 +20,24 @@ public class Box : MonoBehaviour
 
     private void OnMouseDown()
     {
-        item = Instantiate(prefab, MouseControl.Instance.GetMousePosition(), Quaternion.identity).transform;
-        item.GetComponent<Draggable>().SetSprite(itemSO.sprite);
-        item.gameObject.AddComponent<PolygonCollider2D>();
+        if(MouseControl.Instance.DetectClicks)
+        {
+            item = Instantiate(prefab, MouseControl.Instance.GetMousePosition(), Quaternion.identity).transform;
+            item.GetComponent<Draggable>().SetSprite(itemSO.sprite);
+            item.gameObject.AddComponent<PolygonCollider2D>();
+        }
     }
 
     private void OnMouseDrag()
     {
-        item.position = MouseControl.Instance.GetMousePosition();
+        if(MouseControl.Instance.DetectClicks && item != null)
+            item.position = MouseControl.Instance.GetMousePosition();
     }
 
 
     private void OnMouseUp()
     {
-        item.GetComponent<Draggable>().Drop();
+        if(MouseControl.Instance.DetectClicks && item != null)
+            item.GetComponent<Draggable>().Drop(itemSO);
     }
 }

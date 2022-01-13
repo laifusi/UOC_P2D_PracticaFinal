@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class ToyMachineOpenPoint : DropPoint
 {
-    private Animator animator;
+    private ToyMachine toyMachine;
 
     private void Start()
     {
-        animator = GetComponentInParent<Animator>();
+        toyMachine = GetComponentInParent<ToyMachine>();
     }
 
-    public override void ObjectDropped()
+    public override void ObjectDropped(ItemSO item)
     {
-        animator.SetTrigger("AddPart");
+        toyMachine.AddToyPart(item);
     }
 }

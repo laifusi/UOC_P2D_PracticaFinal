@@ -14,7 +14,7 @@ public class Trash : DropPoint
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public override void ObjectDropped()
+    public override void ObjectDropped(ItemSO item)
     {
         partsThrown++;
         if(partsThrown >= 25)

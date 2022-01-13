@@ -11,6 +11,8 @@ public class MouseControl : MonoBehaviour
 
     public static MouseControl Instance;
 
+    [HideInInspector] public bool DetectClicks;
+
     private void Start()
     {
         zOffset = -mainCamera.transform.position.z;
@@ -23,6 +25,8 @@ public class MouseControl : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        ActivateDetectClicks();
     }
 
     public Vector3 GetMousePosition()
@@ -30,5 +34,10 @@ public class MouseControl : MonoBehaviour
         mousePos = Input.mousePosition;
         mousePos.z += zOffset;
         return mainCamera.ScreenToWorldPoint(mousePos);
+    }
+
+    public void ActivateDetectClicks()
+    {
+        DetectClicks = true;
     }
 }

@@ -7,6 +7,10 @@ public class Letter : MonoBehaviour
     [SerializeField] private ItemSO[] possibleHeads, possibleBodies, possibleArms, possibleLegs;
     [SerializeField] private SpriteRenderer head, body, leftArm, rightArm, leftLeg, rightLeg;
 
+    public static Toy ToyToMake;
+
+    private ToyPart headPart, bodyPart, leftArmPart, rightArmPart, leftLegPart, rightLegPart;
+
     public void OpenNewLetter()
     {
         int randomHeadID = Random.Range(0, possibleHeads.Length);
@@ -22,5 +26,27 @@ public class Letter : MonoBehaviour
         leftLeg.sprite = possibleLegs[randomLeftLegID].sprite;
         rightArm.sprite = possibleArms[randomRightArmID].sprite;
         rightLeg.sprite = possibleLegs[randomRightLegID].sprite;
+
+        headPart.bodyPart = Part.Head;
+        headPart.typeOfToy = possibleHeads[randomHeadID].typeOfToy;
+        bodyPart.bodyPart = Part.Body;
+        bodyPart.typeOfToy = possibleBodies[randomBodyID].typeOfToy;
+        leftArmPart.bodyPart = Part.Arm;
+        leftArmPart.typeOfToy = possibleArms[randomLeftArmID].typeOfToy;
+        leftLegPart.bodyPart = Part.Leg;
+        leftLegPart.typeOfToy = possibleLegs[randomLeftLegID].typeOfToy;
+        rightArmPart.bodyPart = Part.Arm;
+        rightArmPart.typeOfToy = possibleArms[randomRightArmID].typeOfToy;
+        rightLegPart.bodyPart = Part.Leg;
+        rightLegPart.typeOfToy = possibleLegs[randomRightLegID].typeOfToy;
+
+        ToyPart[] parts = new ToyPart[6];
+        parts[0] = headPart;
+        parts[1] = bodyPart;
+        parts[2] = leftArmPart;
+        parts[3] = rightArmPart;
+        parts[4] = leftLegPart;
+        parts[5] = rightLegPart;
+        ToyToMake = new Toy(parts);
     }
 }
