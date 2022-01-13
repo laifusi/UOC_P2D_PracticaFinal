@@ -2549,6 +2549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toyPrefab: {fileID: 7815704801232172322, guid: 72b6eefaf99c3d84a98687b726f1590b, type: 3}
   exitPoint: {fileID: 2003014790}
+  extraPartPrefab: {fileID: 6050939640262849532, guid: 9107448b697056e489060088b622c462, type: 3}
 --- !u!1 &1785409903
 GameObject:
   m_ObjectHideFlags: 0
