@@ -8,10 +8,11 @@ public class OptionsManager : MonoBehaviour
     [SerializeField] AudioMixer audioMixer; //AudioMixer
 
     /// <summary>
-    /// Start method where we initialize the sliders and the attenuation levels
+    /// OnEnable method where we initialize the sliders and the attenuation levels
     /// If we didn't have one saved we set them at maximum volume
     /// </summary>
-    private void Start()
+
+    private void OnEnable()
     {
         if(PlayerPrefs.GetString("MusicVolume") == "")
         {
@@ -20,7 +21,7 @@ public class OptionsManager : MonoBehaviour
         }
         else
         {
-            musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+            musicSlider.value = float.Parse(PlayerPrefs.GetString("MusicVolume"));
         }
         
         if(PlayerPrefs.GetString("EffectsVolume") == "")
@@ -30,11 +31,11 @@ public class OptionsManager : MonoBehaviour
         }
         else
         {
-            effectsSlider.value = PlayerPrefs.GetFloat("EffectsVolume");
+            effectsSlider.value = float.Parse(PlayerPrefs.GetString("EffectsVolume"));
         }
 
-        audioMixer.SetFloat("musicAttenuation", musicSlider.value);
-        audioMixer.SetFloat("soundEffectsAttenuation", effectsSlider.value);
+        PlayerPrefs.SetString("MusicVolume", musicSlider.value.ToString());
+        PlayerPrefs.SetString("EffectsVolume", effectsSlider.value.ToString());
     }
 
     /// <summary>
@@ -42,7 +43,7 @@ public class OptionsManager : MonoBehaviour
     /// </summary>
     public void UpdateMusicVolume()
     {
-        PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
+        PlayerPrefs.SetString("MusicVolume", musicSlider.value.ToString());
         audioMixer.SetFloat("musicAttenuation", musicSlider.value);
     }
 
@@ -51,7 +52,7 @@ public class OptionsManager : MonoBehaviour
     /// </summary>
     public void UpdateEffectsVolume()
     {
-        PlayerPrefs.SetFloat("EffectsVolume", effectsSlider.value);
+        PlayerPrefs.SetString("EffectsVolume", effectsSlider.value.ToString());
         audioMixer.SetFloat("soundEffectsAttenuation", effectsSlider.value);
     }
 }

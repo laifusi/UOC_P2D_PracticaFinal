@@ -40,4 +40,12 @@ public class MouseControl : MonoBehaviour
         mousePos.z += zOffset;
         return mainCamera.ScreenToWorldPoint(mousePos);
     }
+
+    /// <summary>
+    /// Method called by the close button of the Letter to reactivate click detection
+    /// </summary>
+    public void ActivateDetectClicks()
+    {
+        DetectClicks = true;
+    }
 }
