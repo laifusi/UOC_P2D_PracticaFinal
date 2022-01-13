@@ -7,9 +7,12 @@ public class WrapPoint : DropPoint
     [SerializeField] private ToyMachine toyMachine;
     [SerializeField] private LettersBox lettersBox;
     [SerializeField] private Button wrapButton;
+    [SerializeField] private AudioClip correctToySound;
+    [SerializeField] private GameObject correctOrWrongToyPanel;
 
     private bool correctHead, correctBody, correctLeftArm, correctRightArm, correctLeftLeg, correctRightLeg;
     private Animator animator;
+    private AudioSource audioSource;
 
     public static Action OnToyMadeRight;
     public static Action<int> OnToyMadeWrong;
@@ -17,6 +20,7 @@ public class WrapPoint : DropPoint
     private void Start()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public override void ItemDropped(ItemSO item)
@@ -32,13 +36,14 @@ public class WrapPoint : DropPoint
 
     public void WrapToy()
     {
+        correctOrWrongToyPanel.SetActive(false);
         animator.SetTrigger("WrapGift");
         toyMachine.DestroyToyGameObject();
         correctHead = correctBody = correctLeftArm = correctRightArm = correctLeftLeg = correctRightLeg = false;
         ToyPart[] createdToyParts = toyMachine.createdToy.toyParts;
         if (createdToyParts.Length != Letter.ToyToMake.toyParts.Length)
         {
-            OnToyMadeWrong?.Invoke(createdToyParts.Length);
+            WrongToy(createdToyParts);
         }
         else
         {
@@ -49,7 +54,7 @@ public class WrapPoint : DropPoint
                     case Part.Head:
                         if(correctHead)
                         {
-                            OnToyMadeWrong?.Invoke(createdToyParts.Length);
+                            WrongToy(createdToyParts);
                             return;
                         }
                         else
@@ -60,7 +65,7 @@ public class WrapPoint : DropPoint
                             }
                             else
                             {
-                                OnToyMadeWrong?.Invoke(createdToyParts.Length);
+                                WrongToy(createdToyParts);
                                 return;
                             }
                         }
@@ -68,7 +73,7 @@ public class WrapPoint : DropPoint
                     case Part.Body:
                         if (correctBody)
                         {
-                            OnToyMadeWrong?.Invoke(createdToyParts.Length);
+                            WrongToy(createdToyParts);
                             return;
                         }
                         else
@@ -79,7 +84,7 @@ public class WrapPoint : DropPoint
                             }
                             else
                             {
-                                OnToyMadeWrong?.Invoke(createdToyParts.Length);
+                                WrongToy(createdToyParts);
                                 return;
                             }
                         }
@@ -89,7 +94,7 @@ public class WrapPoint : DropPoint
                         {
                             if(correctRightArm)
                             {
-                                OnToyMadeWrong?.Invoke(createdToyParts.Length);
+                                WrongToy(createdToyParts);
                                 return;
                             }
                             else if(createdToyParts[i].typeOfToy == Letter.ToyToMake.toyParts[3].typeOfToy)
@@ -98,7 +103,7 @@ public class WrapPoint : DropPoint
                             }
                             else
                             {
-                                OnToyMadeWrong?.Invoke(createdToyParts.Length);
+                                WrongToy(createdToyParts);
                                 return;
                             }
                         }
@@ -114,7 +119,7 @@ public class WrapPoint : DropPoint
                             }
                             else
                             {
-                                OnToyMadeWrong?.Invoke(createdToyParts.Length);
+                                WrongToy(createdToyParts);
                                 return;
                             }
                         }
@@ -124,7 +129,7 @@ public class WrapPoint : DropPoint
                         {
                             if (correctRightLeg)
                             {
-                                OnToyMadeWrong?.Invoke(createdToyParts.Length);
+                                WrongToy(createdToyParts);
                                 return;
                             }
                             else if (createdToyParts[i].typeOfToy == Letter.ToyToMake.toyParts[5].typeOfToy)
@@ -133,7 +138,7 @@ public class WrapPoint : DropPoint
                             }
                             else
                             {
-                                OnToyMadeWrong?.Invoke(createdToyParts.Length);
+                                WrongToy(createdToyParts);
                                 return;
                             }
                         }
@@ -149,7 +154,7 @@ public class WrapPoint : DropPoint
                             }
                             else
                             {
-                                OnToyMadeWrong?.Invoke(createdToyParts.Length);
+                                WrongToy(createdToyParts);
                                 return;
                             }
                         }
@@ -163,7 +168,18 @@ public class WrapPoint : DropPoint
         {
             lettersBox.TakeLetter();
             OnToyMadeRight?.Invoke();
+            audioSource.PlayOneShot(correctToySound);
+            correctOrWrongToyPanel.GetComponent<Image>().color = new Color(0, 1, 0, 0.3f);
+            correctOrWrongToyPanel.SetActive(true);
         }
         wrapButton.interactable = false;
+    }
+
+    private void WrongToy(ToyPart[] createdToyParts)
+    {
+        OnToyMadeWrong?.Invoke(createdToyParts.Length);
+        audioSource.Play();
+        correctOrWrongToyPanel.GetComponent<Image>().color = new Color(1, 0, 0, 0.3f);
+        correctOrWrongToyPanel.SetActive(true);
     }
 }

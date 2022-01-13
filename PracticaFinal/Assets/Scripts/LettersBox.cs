@@ -14,6 +14,7 @@ public class LettersBox : MonoBehaviour
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        TakeLetter();
     }
 
     public void TakeLetter()

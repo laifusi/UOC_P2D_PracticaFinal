@@ -7,6 +7,7 @@ public class Trash : DropPoint
 {
     private int partsThrown;
     private SpriteRenderer spriteRenderer;
+    private AudioSource audioSource;
 
     public static Action<int> OnPartThrown;
 
@@ -16,16 +17,19 @@ public class Trash : DropPoint
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public override void ItemDropped(ItemSO item)
     {
+        audioSource.Play();
         UpdateThrownParts();
         OnPartThrown?.Invoke(1);
     }
 
     public override void ToyDropped(ToyObject toy)
     {
+        audioSource.Play();
         UpdateThrownParts();
         OnPartThrown?.Invoke(toyMachine.createdToy.toyParts.Length);
         Destroy(toy.gameObject);
