@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,10 @@ public class Trash : DropPoint
     private int partsThrown;
     private SpriteRenderer spriteRenderer;
 
+    public static Action<int> OnPartThrown;
+
     [SerializeField] private Sprite[] trashSprites;
+    [SerializeField] private ToyMachine toyMachine;
 
     private void Start()
     {
@@ -17,11 +21,13 @@ public class Trash : DropPoint
     public override void ItemDropped(ItemSO item)
     {
         UpdateThrownParts();
+        OnPartThrown?.Invoke(1);
     }
 
     public override void ToyDropped(ToyObject toy)
     {
         UpdateThrownParts();
+        OnPartThrown?.Invoke(toyMachine.createdToy.toyParts.Length);
         Destroy(toy.gameObject);
     }
 

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,9 @@ public class WrapPoint : DropPoint
 
     private bool correctHead, correctBody, correctLeftArm, correctRightArm, correctLeftLeg, correctRightLeg;
     private Animator animator;
+
+    public static Action OnToyMadeRight;
+    public static Action<int> OnToyMadeWrong;
 
     private void Start()
     {
@@ -34,7 +38,7 @@ public class WrapPoint : DropPoint
         ToyPart[] createdToyParts = toyMachine.createdToy.toyParts;
         if (createdToyParts.Length != Letter.ToyToMake.toyParts.Length)
         {
-            Debug.Log("Wrong");
+            OnToyMadeWrong?.Invoke(createdToyParts.Length);
         }
         else
         {
@@ -45,7 +49,7 @@ public class WrapPoint : DropPoint
                     case Part.Head:
                         if(correctHead)
                         {
-                            Debug.Log("Wrong");
+                            OnToyMadeWrong?.Invoke(createdToyParts.Length);
                             return;
                         }
                         else
@@ -56,7 +60,7 @@ public class WrapPoint : DropPoint
                             }
                             else
                             {
-                                Debug.Log("Wrong");
+                                OnToyMadeWrong?.Invoke(createdToyParts.Length);
                                 return;
                             }
                         }
@@ -64,7 +68,7 @@ public class WrapPoint : DropPoint
                     case Part.Body:
                         if (correctBody)
                         {
-                            Debug.Log("Wrong");
+                            OnToyMadeWrong?.Invoke(createdToyParts.Length);
                             return;
                         }
                         else
@@ -75,7 +79,7 @@ public class WrapPoint : DropPoint
                             }
                             else
                             {
-                                Debug.Log("Wrong");
+                                OnToyMadeWrong?.Invoke(createdToyParts.Length);
                                 return;
                             }
                         }
@@ -85,7 +89,7 @@ public class WrapPoint : DropPoint
                         {
                             if(correctRightArm)
                             {
-                                Debug.Log("Wrong");
+                                OnToyMadeWrong?.Invoke(createdToyParts.Length);
                                 return;
                             }
                             else if(createdToyParts[i].typeOfToy == Letter.ToyToMake.toyParts[3].typeOfToy)
@@ -94,7 +98,7 @@ public class WrapPoint : DropPoint
                             }
                             else
                             {
-                                Debug.Log("Wrong");
+                                OnToyMadeWrong?.Invoke(createdToyParts.Length);
                                 return;
                             }
                         }
@@ -110,7 +114,7 @@ public class WrapPoint : DropPoint
                             }
                             else
                             {
-                                Debug.Log("Wrong");
+                                OnToyMadeWrong?.Invoke(createdToyParts.Length);
                                 return;
                             }
                         }
@@ -120,7 +124,7 @@ public class WrapPoint : DropPoint
                         {
                             if (correctRightLeg)
                             {
-                                Debug.Log("Wrong");
+                                OnToyMadeWrong?.Invoke(createdToyParts.Length);
                                 return;
                             }
                             else if (createdToyParts[i].typeOfToy == Letter.ToyToMake.toyParts[5].typeOfToy)
@@ -129,7 +133,7 @@ public class WrapPoint : DropPoint
                             }
                             else
                             {
-                                Debug.Log("Wrong");
+                                OnToyMadeWrong?.Invoke(createdToyParts.Length);
                                 return;
                             }
                         }
@@ -145,7 +149,7 @@ public class WrapPoint : DropPoint
                             }
                             else
                             {
-                                Debug.Log("Wrong");
+                                OnToyMadeWrong?.Invoke(createdToyParts.Length);
                                 return;
                             }
                         }
@@ -158,6 +162,7 @@ public class WrapPoint : DropPoint
         if (correctHead && correctBody && correctLeftArm && correctLeftLeg && correctRightArm && correctRightLeg)
         {
             lettersBox.TakeLetter();
+            OnToyMadeRight?.Invoke();
         }
         wrapButton.interactable = false;
     }

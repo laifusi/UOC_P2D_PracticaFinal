@@ -3,6 +3,7 @@ using UnityEngine;
 public class ToyObject : Draggable
 {
     private Vector3 position;
+    private Toy toy;
 
     private void Start()
     {

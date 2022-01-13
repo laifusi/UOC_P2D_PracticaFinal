@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -7,15 +8,18 @@ public class Timer : MonoBehaviour
 {
     [SerializeField] private float totalMinutes;
     [SerializeField] private TMP_Text timerText;
-    [SerializeField] private MenuManager menuManager;
+    [SerializeField] private GameManager gameManager;
 
     private float timeLeft;
     private int minutes, seconds;
     private string text;
 
+    public static Action<float> OnTimeChanged;
+    public static float TotalTime;
+
     private void Start()
     {
-        timeLeft = totalMinutes * 60;
+        TotalTime = timeLeft = totalMinutes * 60;
     }
 
     private void Update()
@@ -35,9 +39,11 @@ public class Timer : MonoBehaviour
 
         timerText.SetText(text);
 
+        OnTimeChanged?.Invoke(timeLeft);
+
         if (seconds <= 0 && minutes <= 0)
         {
-            menuManager.EndGame();
+            gameManager.EndGame();
         }
     }
 }
