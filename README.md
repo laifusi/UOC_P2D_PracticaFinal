@@ -50,7 +50,7 @@ Las mayores dificultades encontradas durante el proyecto han sido a la hora de c
 En cuanto al mayor problema, podemos destacar la falta de tiempo y la mala organización propia al estar realizando otras asignaturas a la vez. Quedan pendientes varias cosas que me gustaría haber hecho, como un tutorial antes de empezar la partida. Además, no ha habido tiempo para probar el funcionamiento en Android y en Web.
 
 ## Vídeo
-![](PracticaFinal_video.mp4)
+![](PracticaFinal.mp4)
 
 
 
