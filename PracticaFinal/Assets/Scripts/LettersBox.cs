@@ -9,6 +9,7 @@ public class LettersBox : MonoBehaviour
 
     [SerializeField] private Sprite[] letterBoxSprites;
     [SerializeField] private Letter letter;
+    [SerializeField] private MenuManager menuManager;
 
     private void Start()
     {
@@ -20,7 +21,7 @@ public class LettersBox : MonoBehaviour
         lettersLeft--;
         if(lettersLeft < 0)
         {
-            Debug.Log("End game!");
+            menuManager.EndGame();
         }
         else
         {
