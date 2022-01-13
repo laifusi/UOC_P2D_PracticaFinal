@@ -47,7 +47,7 @@ public class Timer : MonoBehaviour
 
         OnTimeChanged?.Invoke(timeLeft);
 
-        if (seconds <= 0 && minutes <= 0)
+        if (timeLeft <= 0)
         {
             gameManager.EndGame();
         }
