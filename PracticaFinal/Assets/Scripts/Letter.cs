@@ -1,22 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Letter : MonoBehaviour
 {
-    [SerializeField] private ItemSO[] possibleHeads, possibleBodies, possibleArms, possibleLegs;
-    [SerializeField] private SpriteRenderer head, body, leftArm, rightArm, leftLeg, rightLeg;
+    [SerializeField] private ItemSO[] possibleHeads, possibleBodies, possibleArms, possibleLegs; //ItemSO arrays of the possible toy heads, bodies, arms and legs
+    [SerializeField] private SpriteRenderer head, body, leftArm, rightArm, leftLeg, rightLeg; //SpriteRenderers of the letter's head, body, arms and legs
 
-    public static Toy ToyToMake;
+    public static Toy ToyToMake; //static Toy that defines the toy to create
 
-    private ToyPart headPart, bodyPart, leftArmPart, rightArmPart, leftLegPart, rightLegPart;
-
+    private ToyPart headPart, bodyPart, leftArmPart, rightArmPart, leftLegPart, rightLegPart; //ToyParts that define the toy to make
+     
+    /// <summary>
+    /// Method to open a new letter and randomize a new Toy to make
+    /// We randomize an ID, change the sprites of the letter, update the ToyParts and save them to the Toy
+    /// </summary>
     public void OpenNewLetter()
     {
         int randomHeadID = Random.Range(0, possibleHeads.Length);
         int randomBodyID = Random.Range(0, possibleBodies.Length);
-        //int randomArmID = Random.Range(0, possibleArms.Length);
-        //int randomLegID = Random.Range(0, possibleLegs.Length);
         int randomLeftArmID = Random.Range(0, possibleArms.Length);
         int randomLeftLegID = Random.Range(0, possibleLegs.Length);
         int randomRightArmID = Random.Range(0, possibleArms.Length);
@@ -24,10 +24,6 @@ public class Letter : MonoBehaviour
 
         head.sprite = possibleHeads[randomHeadID].sprite;
         body.sprite = possibleBodies[randomBodyID].sprite;
-        //leftArm.sprite = possibleArms[randomArmID].sprite;
-        //leftLeg.sprite = possibleLegs[randomLegID].sprite;
-        //rightArm.sprite = possibleArms[randomArmID].sprite;
-        //rightLeg.sprite = possibleLegs[randomLegID].sprite;
         leftArm.sprite = possibleArms[randomLeftArmID].sprite;
         leftLeg.sprite = possibleLegs[randomLeftLegID].sprite;
         rightArm.sprite = possibleArms[randomRightArmID].sprite;
@@ -38,16 +34,12 @@ public class Letter : MonoBehaviour
         bodyPart.bodyPart = Part.Body;
         bodyPart.typeOfToy = possibleBodies[randomBodyID].typeOfToy;
         leftArmPart.bodyPart = Part.Arm;
-        //leftArmPart.typeOfToy = possibleArms[randomArmID].typeOfToy;
         leftArmPart.typeOfToy = possibleArms[randomLeftArmID].typeOfToy;
         leftLegPart.bodyPart = Part.Leg;
-        //leftLegPart.typeOfToy = possibleLegs[randomLegID].typeOfToy;
         leftLegPart.typeOfToy = possibleLegs[randomLeftLegID].typeOfToy;
         rightArmPart.bodyPart = Part.Arm;
-        //rightArmPart.typeOfToy = possibleArms[randomArmID].typeOfToy;
         rightArmPart.typeOfToy = possibleArms[randomRightArmID].typeOfToy;
         rightLegPart.bodyPart = Part.Leg;
-        //rightLegPart.typeOfToy = possibleLegs[randomLegID].typeOfToy;
         rightLegPart.typeOfToy = possibleLegs[randomRightLegID].typeOfToy;
 
         ToyPart[] parts = new ToyPart[6];

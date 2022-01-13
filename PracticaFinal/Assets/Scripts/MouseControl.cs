@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MouseControl : MonoBehaviour
 {
-    [SerializeField] Camera mainCamera;
+    [SerializeField] Camera mainCamera; //Camera
 
-    private Vector3 mousePos;
-    private float zOffset;
+    private Vector3 mousePos; //Vector3 to save the position of the mouse
+    private float zOffset; //z offset to the camera
 
-    public static MouseControl Instance;
+    public static MouseControl Instance; //Instance of the MouseControl
 
-    [HideInInspector] public bool DetectClicks;
+    [HideInInspector] public bool DetectClicks; //bool that defines if clicks should be detected by our drag and drop system
 
+    /// <summary>
+    /// Start method to initialize the z offset, the Instance and the detection of clicks
+    /// </summary>
     private void Start()
     {
         zOffset = -mainCamera.transform.position.z;
@@ -26,18 +27,17 @@ public class MouseControl : MonoBehaviour
             Destroy(gameObject);
         }
 
-        ActivateDetectClicks();
+        DetectClicks = true;
     }
 
+    /// <summary>
+    /// Method that returns the mouse's position as a world point, with the z offset
+    /// </summary>
+    /// <returns></returns>
     public Vector3 GetMousePosition()
     {
         mousePos = Input.mousePosition;
         mousePos.z += zOffset;
         return mainCamera.ScreenToWorldPoint(mousePos);
-    }
-
-    public void ActivateDetectClicks()
-    {
-        DetectClicks = true;
     }
 }

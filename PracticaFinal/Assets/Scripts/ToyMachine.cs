@@ -3,30 +3,50 @@ using UnityEngine;
 
 public class ToyMachine : MonoBehaviour
 {
-    [HideInInspector] public Toy createdToy;
-    private ToyPart[] toyParts;
-    private List<ItemSO> items = new List<ItemSO>();
+    [HideInInspector] public Toy createdToy; //Toy we created
+    private ToyPart[] toyParts; //ToyParts of the toy we created
+    private List<ItemSO> items = new List<ItemSO>(); //items added
 
-    [SerializeField] private GameObject toyPrefab;
-    [SerializeField] private Transform exitPoint;
-    [SerializeField] private GameObject extraPartPrefab;
+    [SerializeField] private GameObject toyPrefab; //Prefab of a full toy
+    [SerializeField] private Transform exitPoint; //Transform of the exit point
+    [SerializeField] private GameObject extraPartPrefab; //Prefab for extra parts
 
-    private GameObject toy;
-    private SpriteRenderer[] toySpriteRenderers;
-    private SpriteRenderer head, body, leftArm, rightArm, leftLeg, rightLeg;
-    private Animator animator;
+    private GameObject toy; //GameObject of the toy
+    private SpriteRenderer[] toySpriteRenderers; //SpriteRenderers of the toy prefab
+    private SpriteRenderer head, body, leftArm, rightArm, leftLeg, rightLeg; //spriteRenderers of the toy prefab assigned to body part
+    private Animator animator; //Animator component
 
+    /// <summary>
+    /// Start method to initialize components
+    /// </summary>
     private void Start()
     {
         animator = GetComponent<Animator>();
     }
 
+    /// <summary>
+    /// Method to add an item to the machine
+    /// Called when an item is dropped on the opening point of the machine
+    /// </summary>
+    /// <param name="item"></param>
     public void AddToyPart(ItemSO item)
     {
         animator.SetTrigger("AddPart");
         items.Add(item);
     }
 
+    /// <summary>
+    /// Method to make the toy
+    /// Called by the MakeToy button
+    /// We destroy the previous toy if it hadn't been destroyed
+    /// We instantiate the prefab and save its sprite renderers
+    /// We check add each body part, for each item we save it as a ToyPart
+    /// We check which body part it is and add the sprites to the right Sprite Renderers
+    /// If we already have that body part, we add an extra part, with a slight rotation
+    /// For the arms and legs, we check if they are the correct type for either right or left and set it to its side if it is
+    /// If it's neither and we already have both sprites, we choose a random arm or leg to add the extra part to
+    /// We save the parts to the Toy and clear the items list
+    /// </summary>
     public void MakeToy()
     {
         if (toy != null)
@@ -199,6 +219,9 @@ public class ToyMachine : MonoBehaviour
         items.Clear();
     }
 
+    /// <summary>
+    /// Method to destroy the toy GameObject
+    /// </summary>
     public void DestroyToyGameObject()
     {
         Destroy(toy);
