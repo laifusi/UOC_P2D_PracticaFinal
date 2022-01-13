@@ -42,12 +42,12 @@ La música de fondo es el [Wintery Loop](https://opengameart.org/content/wintery
 ## Builds
 Se han hecho builds tanto para Windows, como para WebGL y Android.
 
-Los builds se pueden encontrar [aquí]().
+Los builds se pueden encontrar [aquí](https://fuscor.itch.io/practica-final-la-maquina-de-juguetes).
 
 ## Dificultades y problemas
 Las mayores dificultades encontradas durante el proyecto han sido a la hora de crear los juguetes y compararlos, teniendo en cuenta todos los factores.
 
-En cuanto al mayor problema, podemos destacar la falta de tiempo y la mala organización propia al estar realizando otras asignaturas a la vez. Quedan pendientes varias cosas que me gustaría haber hecho, como un tutorial antes de empezar la partida.
+En cuanto al mayor problema, podemos destacar la falta de tiempo y la mala organización propia al estar realizando otras asignaturas a la vez. Quedan pendientes varias cosas que me gustaría haber hecho, como un tutorial antes de empezar la partida. Además, no ha habido tiempo para probar el funcionamiento en Android y en Web.
 
 ## Vídeo
 ![](PracticaFinal_video.mp4)
