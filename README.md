@@ -3,7 +3,7 @@
 ## Cómo jugar
 Para esta última práctica hemos hecho un juego libre. Al decidir qué hacer a pocos días de Navidad, nos hemos inspirado en una fábrica de juguetes para el diseño del juego.
 
-En La Máquina de Jueguetes, el jugador deberá completar los 14 juguetes pedidos en las cartas que se han recibido. Para ello, deberá meter las diferentes partes de los juguetes en la máquina para crear el juguete pedido. Pero deberá hacerlo antes de que se acabe el tiempo.
+En La Máquina de Juguetes, el jugador deberá completar los 14 juguetes pedidos en las cartas que se han recibido. Para ello, deberá meter las diferentes partes de los juguetes en la máquina para crear el juguete pedido. Pero deberá hacerlo antes de que se acabe el tiempo.
 
 En cada carta hay una combinación aleatoria de las seis partes de los juguetes, cabeza, cuerpo, brazos y piernas, de entre cuatro tipos de juguete, muñeca, robot, conejo y osito de peluche. Para mezclar las piezas, el jugador deberá arrastrar, desde las cajas correspondientes, las piezas correctas a la máquina. Una vez estan todas las piezas en la máquina, deberá pulsar el botón de creación de juguetes. Con el juguete creado, deberá ponerlo sobre el papel de regalo y envolverlo, usando el botón de envolver. Si el juguete era el correcto, se abrirá la siguiente carta. Si no, habrá que volver a hacer el juguete. Si en algún momento el jugador se equivoca de pieza o completa un juguete equivocado, puede lanzar ambos a la papelera.
 
@@ -45,7 +45,9 @@ Se han hecho builds tanto para Windows, como para WebGL y Android.
 Los builds se pueden encontrar [aquí]().
 
 ## Dificultades y problemas
+Las mayores dificultades encontradas durante el proyecto han sido a la hora de crear los juguetes y compararlos, teniendo en cuenta todos los factores.
 
+En cuanto al mayor problema, podemos destacar la falta de tiempo y la mala organización propia al estar realizando otras asignaturas a la vez. Quedan pendientes varias cosas que me gustaría haber hecho, como un tutorial antes de empezar la partida.
 
 ## Vídeo
 ![](PracticaFinal_video.mp4)
