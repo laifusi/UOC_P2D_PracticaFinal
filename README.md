@@ -1,93 +1,56 @@
-# Practica Final
+# Practica final
+
+## Cómo jugar
+Para esta última práctica hemos hecho un juego libre. Al decidir qué hacer a pocos días de Navidad, nos hemos inspirado en una fábrica de juguetes para el diseño del juego.
+
+En La Máquina de Jueguetes, el jugador deberá completar los 14 juguetes pedidos en las cartas que se han recibido. Para ello, deberá meter las diferentes partes de los juguetes en la máquina para crear el juguete pedido. Pero deberá hacerlo antes de que se acabe el tiempo.
+
+En cada carta hay una combinación aleatoria de las seis partes de los juguetes, cabeza, cuerpo, brazos y piernas, de entre cuatro tipos de juguete, muñeca, robot, conejo y osito de peluche. Para mezclar las piezas, el jugador deberá arrastrar, desde las cajas correspondientes, las piezas correctas a la máquina. Una vez estan todas las piezas en la máquina, deberá pulsar el botón de creación de juguetes. Con el juguete creado, deberá ponerlo sobre el papel de regalo y envolverlo, usando el botón de envolver. Si el juguete era el correcto, se abrirá la siguiente carta. Si no, habrá que volver a hacer el juguete. Si en algún momento el jugador se equivoca de pieza o completa un juguete equivocado, puede lanzar ambos a la papelera.
+
+## Estructura e implementación
+La implementación del juego se puede dividir en dos partes diferenciadas, aunque conectadas: el sistema de drag y drop y la creación y comparación de los juguetes.
+
+Para el primero, creamos dos clases base, DropPoint y Draggable. Estas se encargarán de definir qué objetos se pueden arrastrar y cuáles son puntos en los que afecta soltar un objeto. En el caso de los DropPoint, comprobamos cuando un objeto de tipo Draggable entra en su Collider2D para avisar al Draggable de que puede soltar el objeto y de dónde lo está soltando. Además, se definen dos métodos abstractos que definirán qué debe pasar cuando un item o un juguete se sueltan sobre dicho DropPoint. Cabe destacar que no todos los DropPoints aceptarán tanto items como juguetes. Draggable, por su parte, se encarga de saber si puede ser soltado y dónde y de qué hacer cuando es soltado.
+
+Tenemos tres clases que heredan de DropPoint: Trash, ToyMachineOpenPoint y WrapPoint. El primero simplemente destruye el elemento que ha sido lanzado y guarda el número de objetos tirados a la papelera. El segundo se encarga de guardar en ToyMachine el item que ha recibido. El último es el punto en el que el jugador dejará el juguete antes de envolverlo. Esta última clase también es importante para la comparación de juguetes, de la que hablaremos más adelante.
+
+Draggable es una clase utilizada por otros tres elementos: la clase Box, el prefab DraggableItem y la clase ToyObject. Los dos primeros están relacionados, ya que Box detectará los clics de ratón sobre las cajas y creará un DraggableItem que será el Draggable que los DropPoints detectarán, correspondiente a las piezas de juguetes. Será Box, además, quién se encargue de mover el item y de detectar cuando ha sido soltado. La clase ToyObject, por su parte, hereda de Draggable, pero será ella misma la que detecte los clics del ratón que definirán si se mueve o se suelta el juguete.
+
+Además, usamos una clase MouseControl a la que le pediremos la posición del ratón y que determinará si se deben detectar los clics en nuestro sistema de drag y drop o no.
+
+El sistema de creación y comparación de juguetes tiene cinco clases esenciales: ItemSO, Letter, ToyMachine, Toy y WrapPoint.
+
+ItemSO es un ScriptableObject con el que definimos todas las partes de los juguetes, definiendo qué parte del cuerpo son, qué tipo de juguete son y qué sprite se debe usar para representarlas. Toy, por su parte, define lo que es un juguete, es decir, un conjunto de lo que hemos llamado ToyParts. Una ToyPart se compone de tipo de juguete y parte del cuerpo. Con estas dos clases podremos comparar para cada parte utilizada para crear un juguete cuáles son iguales y cuáles no.
+
+Letter, por su parte, se encarga de randomizar un nuevo juguete y mostrarlo cada vez que se abre una carta nueva. Esto se hará desde la clase LettersBox a la que llamaremos si el juguete anterior ha sido completado correctamente. Esta clase, además, sabrá cuando hemos completado todos los juguetes y se encargará de finalizar el juego cuando ocurra.
+
+La clase ToyMachine tiene dos métodos importantes: AddPart y MakeToy. El primero, como ya hemos comentado, es llamado por ToyMachineOpenPoint cuando se suelta un item sobre la máquina, y simplemente guarda el ItemSO correspondiente al elemento añadido a la máquina. MakeToy, en cambio, se encarga de crear el juguete. Este será llamado por el botón de creación de juguete de la interfaz. Para la creación del juguete tendremos en cuenta la parte del cuerpo de cada item añadido y las colocaremos en la posición correcta, usando un prefab en el que determinamos la posición de cada parte del cuerpo. Si se añaden partes de más, se crearán en la misma posición con una rotación aleatoria. En el caso de los brazos y las piernas, comprobaremos si alguna de las dos extremidades usa el tipo de juguete correcto para que visualmente se vea que el juguete está bien hecho.
+
+Finalmente, WrapPoint será quién se encargue de comparar el juguete a crear, guardado en la clase Letter, y el juguete creado en la clase ToyMachine. Este método, WrapToy, será llamado con el botón de envolver, que además solo activaremos si hay un juguete sobre este DropPoint. WrapToy, por tanto, comparará los dos juguetes, teniendo en cuenta el número de partes, que ninguna se repita y que sean del tipo de juguete correcto. Además, será quién llame a LettersBox para abrir una nueva carta si el juguete creado es correcto.
+
+El proyecto se compone por otras clases con poca funcionalidad, como son OpenLetter, que detecta el clic sobre la carta abierta y activa la carta para ver el juguete a crear; o Timer, que se encarga de la cuenta atrás y que determinará cuando el jugador pierde la partida.
+
+Por otro lado tenemos los llamados "Managers". Para los cambios entre escenas, usamos el MenuManager. El menú de pausa está controlado por la clase PauseManager, que además, controla la parada del tiempo. MusicManager se encarga de que la música sea continua entre todas las escenas, mientras que OptionsManager se encarga del volumen tanto de la música como de los efectos de sonido, que pueden ser editados desde el menú de opciones. GameManager, por su parte, sirve de conexión entre el juego y el MenuManager, además de almacenar datos sobre la partida: el tiempo utilizado, el número de juguetes completados y el número de items desperdiciados. Y EndCanvasManager utiliza los datos almacenados en PlayerPrefs, desde el GameManager, para actualizar el canvas y las estadísticas del fin del juego.
+
+## Sprites y sonidos
+Para esta PAC hemos elaborado todos los Sprites mediante el programa Inkscape.
+
+Los efectos de sonido se han hecho mediante el programa Bfxr o se han encontrado en OpenGameArt, [Metal interactions](https://opengameart.org/content/metal-interactions) y [Sound Effects Pack](https://opengameart.org/content/sound-effects-pack).
+
+La música de fondo es el [Wintery Loop](https://opengameart.org/content/wintery-loop) de [Emma_MA](https://opengameart.org/users/emmama).
+
+## Builds
+Se han hecho builds tanto para Windows, como para WebGL y Android.
+
+Los builds se pueden encontrar [aquí]().
+
+## Dificultades y problemas
+
+
+## Vídeo
+![](PracticaFinal_video.mp4)
 
 
 
-## Getting started
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://gitlab.com/-/experiment/new_project_readme_content:a546e64770ddf0699f6e3e19bd9983ea?https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://gitlab.com/-/experiment/new_project_readme_content:a546e64770ddf0699f6e3e19bd9983ea?https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://gitlab.com/-/experiment/new_project_readme_content:a546e64770ddf0699f6e3e19bd9983ea?https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.com/lfusterco/practica-final.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.com/-/experiment/new_project_readme_content:a546e64770ddf0699f6e3e19bd9983ea?https://gitlab.com/lfusterco/practica-final/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://gitlab.com/-/experiment/new_project_readme_content:a546e64770ddf0699f6e3e19bd9983ea?https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://gitlab.com/-/experiment/new_project_readme_content:a546e64770ddf0699f6e3e19bd9983ea?https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://gitlab.com/-/experiment/new_project_readme_content:a546e64770ddf0699f6e3e19bd9983ea?https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://gitlab.com/-/experiment/new_project_readme_content:a546e64770ddf0699f6e3e19bd9983ea?https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://gitlab.com/-/experiment/new_project_readme_content:a546e64770ddf0699f6e3e19bd9983ea?https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://gitlab.com/-/experiment/new_project_readme_content:a546e64770ddf0699f6e3e19bd9983ea?https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://gitlab.com/-/experiment/new_project_readme_content:a546e64770ddf0699f6e3e19bd9983ea?https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://gitlab.com/-/experiment/new_project_readme_content:a546e64770ddf0699f6e3e19bd9983ea?https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://gitlab.com/-/experiment/new_project_readme_content:a546e64770ddf0699f6e3e19bd9983ea?https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://gitlab.com/-/experiment/new_project_readme_content:a546e64770ddf0699f6e3e19bd9983ea?https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://gitlab.com/-/experiment/new_project_readme_content:a546e64770ddf0699f6e3e19bd9983ea?https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
 
